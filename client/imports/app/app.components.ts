@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+
+import { Parties } from '../../../both/collections/parties.collection';
+import { Party } from '../../../both/models/party.model';
 
 import template from './app.components.html';
 
@@ -7,18 +11,9 @@ import template from './app.components.html';
   template
 })
 export class AppComponent {
- parties: any[];
+ parties: Observable<Party[]>;
 
  constructor(){
-  this.parties = [
-    {'name': 'Awesome party',
-     'description': 'Awesome stuff',
-      'location': 'Space'
-    },
-    {'name': 'Another one',
-     'description':'Gonna be lit',
-     'location': 'London'
-    }
-  ];
+  this.parties = Parties.find({}).zone();
  }
 }
